@@ -1,12 +1,57 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://kit.fontawesome.com/d1333a485b.js" crossorigin="anonymous"></script>
-    <title>Wbpack Exercise</title>
-<script defer src="main.js"></script></head>
-<body>
-    <h1>Hello feature!</h1>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script
+      src="https://kit.fontawesome.com/d1333a485b.js"
+      crossorigin="anonymous"
+    ></script>
+    <title>TV shows</title>
+  <script defer src="main.js"></script></head>
+  <body>
+    <h1>Display</h1>
+    <div class="model-container">
+      <div class="modal-img-container">
+        <img class="modal-img" src="./imgs/test-img.jpg" alt="modal" />
+        <h3 class="modal-header">Space 3</h3>
+      </div>
+      <div class="modal-detail-container">
+        <p class="detail">Fuel: titanium</p>
+        <p class="detail">Light: 100,000</p>
+        <p class="detail">Weight: 400</p>
+        <p class="detail">Power: 100,000</p>
+      </div>
+
+      <div class="comments-container">
+        <div class="comment-header-container">
+          <h3 class="comment-header">Comments</h3>
+          <span class="total">0</span>
+        </div>
+        <ul class="comments-list"></ul>
+      </div>
+      <div class="comment-form">
+        <h3 class="form-header">Add a comment</h3>
+        <form action="#" class="form">
+          <input
+            type="text"
+            name="name"
+            id="name"
+            placeholder="Your name"
+            class="name-input"
+            required
+          />
+          <textarea
+            name="comment"
+            required
+            id="message"
+            rows="4"
+            placeholder="Your insights"
+            class="textarea-input"
+          ></textarea>
+          <input type="submit" value="Comment" class="btn" />
+        </form>
+      </div>
+    </div>
+  </body>
 </html>
