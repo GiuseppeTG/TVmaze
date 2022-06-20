@@ -1,15 +1,16 @@
 ![](https://img.shields.io/badge/Microverse-blueviolet)
 
-# Project Name
+# TV Shows
 
-> Description the project.
+> In this project we built a webpage where the user can search for different TV shows, comment them and like them.
 
 
 ## Built With
 
-- Major languages
-- Frameworks
-- Technologies used
+- Major languages: HTML, CSS, JS, Jest
+- Frameworks 
+- Technologies used:  Webpack, VSCode, git, GitHub, Gitflow
+- API: https://api.tvmaze.com/show
 
 ## Live Demo (if available)
 
@@ -53,7 +54,7 @@ Give a ⭐️ if you like this project!
 
 ## Acknowledgments
 
-- Hat tip to anyone whose code was used
+- Free source API by [TV Maze](https://www.tvmaze.com/api)
 - Inspiration
 - etc
 
