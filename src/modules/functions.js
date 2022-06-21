@@ -1,13 +1,14 @@
 import axios from 'axios';
 import Swal from 'sweetalert2';
 
-const BaseURL = 'https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps';
+const BaseURL =
+  'https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps';
 const APP_ID = 'QC6bnLUQwMT9GlJ8wh3Z';
 
-const addComment = async (name, comment, item_id = APP_ID) => {
+const addComment = async (name, comment, itemID) => {
   if (name && comment) {
     const newComment = {
-      item_id,
+      item_id: itemID,
       username: `${name}`,
       comment: `${comment}`,
     };
@@ -20,10 +21,10 @@ const addComment = async (name, comment, item_id = APP_ID) => {
 
 const fetchComments = async (itemID) => {
   const response = await fetch(
-    `${BaseURL}/${APP_ID}/comments?item_id=${itemID}`,
+    `${BaseURL}/${APP_ID}/comments?item_id=${itemID}`
   );
   const data = await response.json();
-  return data;
+  return data.length ? data : [];
 };
 
 const getModalContent = (
@@ -34,7 +35,7 @@ const getModalContent = (
   light,
   power,
   totalComments,
-  itemID,
+  itemID
 ) => {
   Swal.fire({
     html: `
@@ -85,12 +86,14 @@ const getModalContent = (
   });
 
   fetchComments(itemID).then((data) => {
-    data.forEach((item) => {
-      const li = document.createElement('li');
-      li.className = 'comment';
-      li.textContent = `${item.creation_date} ${item.username}: ${item.comment}`;
-      document.querySelector('.comments-list').appendChild(li);
-    });
+    if (data.length) {
+      data.forEach((item) => {
+        const li = document.createElement('li');
+        li.className = 'comment';
+        li.textContent = `${item.creation_date} ${item.username}: ${item.comment}`;
+        document.querySelector('.comments-list').appendChild(li);
+      });
+    }
   });
 
   const nameInput = document.querySelector('#name');
@@ -105,10 +108,10 @@ const getModalContent = (
 
 const getTotalComments = async (itemID) => {
   const response = await fetch(
-    `${BaseURL}/${APP_ID}/comments?item_id=${itemID}`,
+    `${BaseURL}/${APP_ID}/comments?item_id=${itemID}`
   );
   const data = await response.json();
-  return data.length;
+  return data.length === undefined ? 0 : data.length;
 };
 
 const displayModal = (imgURL, name, itemID, fuel, weight, light, power) => {
@@ -117,7 +120,6 @@ const displayModal = (imgURL, name, itemID, fuel, weight, light, power) => {
   getTotalComments(itemID).then((data) => {
     totalComments = data;
 
-    // append inside then
     // fethch comments for one item
 
     getModalContent(
@@ -128,7 +130,7 @@ const displayModal = (imgURL, name, itemID, fuel, weight, light, power) => {
       light,
       power,
       totalComments,
-      itemID,
+      itemID
     );
   });
 };

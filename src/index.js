@@ -3,18 +3,6 @@ import './style.css';
 import './footer.css';
 import './modal-styles.css';
 
-document.querySelector('.launchAnotherModal').addEventListener('click', () => {
-  displayModal(
-    'https://upload.wikimedia.org/wikipedia/commons/d/d4/Lydia-Forson.jpg',
-    'Lydia Mayer',
-    'QC6bnLUQwMT9GlJ8wh3Z',
-    'Total',
-    4556789,
-    89,
-    89
-  );
-});
-
 // const AppId = 'ucRLpFwZl71GWbNyaaEC';
 const ApiUrl = 'https://api.tvmaze.com';
 const form = document.querySelector('.search-form');
@@ -24,7 +12,7 @@ const cardContainer = document.querySelector('.grid-container');
 // -----CARD----- //
 
 class UI {
-  static renderCard = (title, imgUrl, likesCounter = '123') => {
+  static renderCard = (title, imgUrl, itemID, likesCounter = '123') => {
     const card = document.createElement('div');
     card.classList.add('card');
 
@@ -55,9 +43,9 @@ class UI {
     const commentsButton = document.createElement('button');
     commentsButton.classList.add('comments-button');
     commentsButton.textContent = 'Comments';
-    // commentsButton.addEventListener('click', () => {
-    //   console.log(title)
-    // });
+    commentsButton.addEventListener('click', () => {
+      displayModal(imgUrl, title, itemID, 'Total', 4556789, 89, 89);
+    });
 
     cardContainer.append(card);
     card.append(imageContainer, itemInfo, commentsButton);
@@ -74,16 +62,17 @@ const getSearchedShows = async (query) => {
   const response = await fetch(`${ApiUrl}/search/shows?q=${query}`);
   const data = await response.json();
   data.forEach((TvShow) =>
-    UI.renderCard(TvShow.show.name, TvShow.show.image.medium)
+    UI.renderCard(TvShow.show.name, TvShow.show.image.medium, TvShow.show.id)
   );
 };
 
 const getSomeShows = async () => {
   const response = await fetch(`${ApiUrl}/show`);
   const data = await response.json();
-  // console.log(data)
   const someShows = data.slice(0, 9);
-  someShows.forEach((show) => UI.renderCard(show.name, show.image.medium));
+  someShows.forEach((show) =>
+    UI.renderCard(show.name, show.image.medium, show.id)
+  );
 };
 
 // ----- SEARCH -----//
