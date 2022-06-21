@@ -75,8 +75,11 @@ const getModalContent = (
       `,
     showCloseButton: true,
   });
+
+  document.querySelector('.comments-list').innerHTML = '<p>Alfred is here</p>';
   const nameInput = document.querySelector('#name');
   const commentInput = document.querySelector('#message');
+
   document.querySelector('.form').addEventListener('submit', (e) => {
     addComment(nameInput.value, commentInput.value, itemID);
     e.preventDefault();
@@ -100,20 +103,13 @@ const getTotalComments = async (itemID) => {
   return data.length;
 };
 
-const displayModal = (
-  imgURL = 'https://dailyguidenetwork.com/wp-content/uploads/2021/04/SIsta-Afia-620x406.jpg',
-  name = 'John legend',
-  itemID = 'QC6bnLUQwMT9GlJ8wh3Z',
-  fuel = 'titanium',
-  weight = 1324567890,
-  light = 897654678,
-  power = 7654,
-) => {
+const displayModal = (imgURL, name, itemID, fuel, weight, light, power) => {
   // get total comments for one item
   let totalComments = 0;
   getTotalComments(itemID).then((data) => {
     totalComments = data;
 
+    // append inside then
     // fethch comments for one item
     fetchComments(itemID).then((data) => {
       data.forEach((item) => {
