@@ -64,6 +64,13 @@ nav {
   color: var(--color4);
 }
 
+.logo a {
+  display: flex;
+  gap: 20px;
+  text-decoration: none;
+  color: var(--color4);
+}
+
 .logo p {
   font-size: 25px;
   letter-spacing: 2px;
