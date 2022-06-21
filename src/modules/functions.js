@@ -16,43 +16,19 @@ const loadComments = async (itemID = APP_ID) => {
     url: `${BaseURL}/${APP_ID}/comments?item_id=${itemID}`,
   });
 
-  // set the total to the length of the list
-  // totalInput.innerHTML = data.length;
-
-  // map the list as li on screen
-  // data.forEach((item) => {
-  //   const li = document.createElement('li');
-  //   li.className = 'comment';
-
-  //   li.textContent = `${item.creation_date} ${item.username}: ${item.comment}`;
-  //   commentsListContainer.appendChild(li);
-  // });
-
   return data;
 };
 
-const displayModal = (
-  imgURL = 'https://dailyguidenetwork.com/wp-content/uploads/2021/04/SIsta-Afia-620x406.jpg',
-  name = 'John legend',
-  itemID = 'QC6bnLUQwMT9GlJ8wh3Z',
-  fuel = 'titanium',
-  weight = 1324567890,
-  light = 897654678,
-  power = 7654
+const getModalContent = (
+  imgURL,
+  name,
+  fuel,
+  weight,
+  light,
+  power,
+  totalComments
 ) => {
-  const data = loadComments(itemID);
-  console.log('working now', data);
-
-  const li = document.createElement('li');
-
-  // data.forEach((item) => {
-  //   li.className = 'comment';
-
-  //   li.textContent = `${item.creation_date} ${item.username}: ${item.comment}`;
-  // });
-
   Swal.fire({
-    title: '<strong>HTML <u>example</u></strong>',
     html: `
        <div class="model-container">
       <div class="modal-img-container">
@@ -69,13 +45,13 @@ const displayModal = (
       <div class="comments-container">
         <div class="comment-header-container">
           <h3 class="comment-header">Comments</h3>
-          <span class="total">${data.length}</span>
+          <span class="total">${totalComments}</span>
         </div>
-        // <ul class="comments-list">${li}</ul>
+        <ul class="comments-list"></ul>
       </div>
       <div class="comment-form">
         <h3 class="form-header">Add a comment</h3>
-        <form action="#" class="form">
+        <div class="form">
           <input
             type="text"
             name="name"
@@ -92,13 +68,36 @@ const displayModal = (
             placeholder="Your insights"
             class="textarea-input"
           ></textarea>
-          <input type="submit" value="Comment" class="btn" />
-        </form>
+          <input type="submit" value="Comment" class="btn" id="submit-form" />
+        </div>
       </div>
     </div>
       `,
     showCloseButton: true,
   });
+};
+
+const displayModal = (
+  imgURL = 'https://dailyguidenetwork.com/wp-content/uploads/2021/04/SIsta-Afia-620x406.jpg',
+  name = 'John legend',
+  itemID = 'QC6bnLUQwMT9GlJ8wh3Z',
+  fuel = 'titanium',
+  weight = 1324567890,
+  light = 897654678,
+  power = 7654
+) => {
+  fetch(`${BaseURL}/${APP_ID}/comments?item_id=${itemID}`)
+    .then((response) => response.json())
+    .then((data) => {
+      data.forEach((item) => {
+        const li = document.createElement('li');
+        li.className = 'comment';
+        li.textContent = `${item.creation_date} ${item.username}: ${item.comment}`;
+      });
+
+      const totalComments = data.length;
+      getModalContent(imgURL, name, fuel, weight, light, power, totalComments);
+    });
 };
 
 const addComment = async (name, comment, item_id = APP_ID) => {
