@@ -5,6 +5,23 @@ const url = 'https://api.tvmaze.com';
 
 
 
+const getSearchedShows = async () => {
+  const response = await fetch(`${url}/search/shows?q=simpsons`);
+  const data = await response.json();
+  return data
+}
+
+const getSomeShows = async () => {
+  const response = await fetch(`${url}/show`);
+  let data = await response.json();
+  let someShows = data.slice(0, 9);
+  return someShows
+}
+
+getSearchedShows();
+
+getSomeShows();
+
 // -----CARD----- //
 
 class UI {
