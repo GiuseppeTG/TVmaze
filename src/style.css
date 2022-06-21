@@ -4,10 +4,81 @@
   box-sizing: border-box;
 }
 
-h1 {
-  width: fit-content;
-  margin: 120px auto 120px auto;
+:root {
+  --color1: #0b0c10;
+  --color2: #1F2833;
+  --color3: #c5c6c7;
+  --color4: #66fcf1;
+  --color5: #45a29e;
 }
+
+body {
+  font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  background: linear-gradient(#0f2027f8, #203a43de, #2c5364da),
+              url(./images/background.jpg) no-repeat center center / cover;
+}
+
+header {
+  display: flex;
+  height: 75px;
+  width: 100%;
+  background-color: var(--color2);
+}
+
+nav {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.title {
+  display: flex;
+  flex-direction: column;
+  margin: 120px auto 120px auto;
+  justify-content: center;
+  align-items: center;
+}
+
+.title h1 {
+  font-size: 75px;
+  color: var(--color4);
+  font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  font-weight: 700;
+  letter-spacing: 10px;
+  text-align: center;
+}
+
+.title p {
+  margin-top: 20px;
+  color: white;
+  text-align: center;
+  width: 300px;
+}
+
+.logo {
+  display: flex;
+  gap: 10px;
+  font-size: 25px;
+  color: var(--color4);
+}
+
+.logo p {
+  font-size: 25px;
+  letter-spacing: 2px;
+}
+
+.links {
+  display: flex;
+  list-style: none;
+  gap: 20px;
+}
+
+.links li a {
+  color: white;
+  text-decoration: none;
+}
+
 
 .grid-container {
   border: green solid 2px;
