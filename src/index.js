@@ -11,6 +11,6 @@ document.querySelector('.launchAnotherModal').addEventListener('click', () => {
     'Total',
     4556789,
     89,
-    89
+    89,
   );
 });

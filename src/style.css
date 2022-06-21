@@ -14,7 +14,8 @@
 
 body {
   font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-  background: linear-gradient(#0f2027f8, #203a43de, #2c5364da),
+  background:
+    linear-gradient(#0f2027f8, #203a43de, #2c5364da),
     url(./images/background.jpg) no-repeat center center / cover;
 }
 
