@@ -6,8 +6,7 @@ const commentsListContainer = document.querySelector('.comments-list');
 const nameInput = document.querySelector('#name');
 const commentInput = document.querySelector('#message');
 
-const BaseURL =
-  'https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps';
+const BaseURL = 'https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps';
 const APP_ID = 'QC6bnLUQwMT9GlJ8wh3Z';
 
 const getModalContent = (
@@ -17,7 +16,7 @@ const getModalContent = (
   weight,
   light,
   power,
-  totalComments
+  totalComments,
 ) => {
   Swal.fire({
     html: `
@@ -70,7 +69,7 @@ const getModalContent = (
 
 const fetchComments = async (itemID) => {
   const response = await fetch(
-    `${BaseURL}/${APP_ID}/comments?item_id=${itemID}`
+    `${BaseURL}/${APP_ID}/comments?item_id=${itemID}`,
   );
   const data = await response.json();
   return data;
@@ -78,7 +77,7 @@ const fetchComments = async (itemID) => {
 
 const getTotalComments = async (itemID) => {
   const response = await fetch(
-    `${BaseURL}/${APP_ID}/comments?item_id=${itemID}`
+    `${BaseURL}/${APP_ID}/comments?item_id=${itemID}`,
   );
   const data = await response.json();
   return data.length;
@@ -91,7 +90,7 @@ const displayModal = (
   fuel = 'titanium',
   weight = 1324567890,
   light = 897654678,
-  power = 7654
+  power = 7654,
 ) => {
   // get total comments for one item
   let totalComments = 0;
@@ -130,4 +129,6 @@ const addComment = async (name, comment, item_id = APP_ID) => {
   return false;
 };
 
-export { addComment, nameInput, commentInput, displayModal };
+export {
+  addComment, nameInput, commentInput, displayModal,
+};
