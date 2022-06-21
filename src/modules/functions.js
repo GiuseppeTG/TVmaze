@@ -18,6 +18,14 @@ const addComment = async (name, comment, item_id = APP_ID) => {
   return false;
 };
 
+const fetchComments = async (itemID) => {
+  const response = await fetch(
+    `${BaseURL}/${APP_ID}/comments?item_id=${itemID}`,
+  );
+  const data = await response.json();
+  return data;
+};
+
 const getModalContent = (
   imgURL,
   name,
@@ -76,7 +84,15 @@ const getModalContent = (
     showCloseButton: true,
   });
 
-  document.querySelector('.comments-list').innerHTML = '<p>Alfred is here</p>';
+  fetchComments(itemID).then((data) => {
+    data.forEach((item) => {
+      const li = document.createElement('li');
+      li.className = 'comment';
+      li.textContent = `${item.creation_date} ${item.username}: ${item.comment}`;
+      document.querySelector('.comments-list').appendChild(li);
+    });
+  });
+
   const nameInput = document.querySelector('#name');
   const commentInput = document.querySelector('#message');
 
@@ -85,14 +101,6 @@ const getModalContent = (
     e.preventDefault();
     Swal.close();
   });
-};
-
-const fetchComments = async (itemID) => {
-  const response = await fetch(
-    `${BaseURL}/${APP_ID}/comments?item_id=${itemID}`,
-  );
-  const data = await response.json();
-  return data;
 };
 
 const getTotalComments = async (itemID) => {
@@ -111,25 +119,17 @@ const displayModal = (imgURL, name, itemID, fuel, weight, light, power) => {
 
     // append inside then
     // fethch comments for one item
-    fetchComments(itemID).then((data) => {
-      data.forEach((item) => {
-        const li = document.createElement('li');
-        li.className = 'comment';
-        li.textContent = `${item.creation_date} ${item.username}: ${item.comment}`;
-      });
 
-      // dynamically display the content of the modal
-      getModalContent(
-        imgURL,
-        name,
-        fuel,
-        weight,
-        light,
-        power,
-        totalComments,
-        itemID,
-      );
-    });
+    getModalContent(
+      imgURL,
+      name,
+      fuel,
+      weight,
+      light,
+      power,
+      totalComments,
+      itemID,
+    );
   });
 };
 
