@@ -3,7 +3,7 @@
   left: 0;
   bottom: 0;
   width: 100%;
-  background-color: rgb(49, 34, 101);
+  background-color: var(--color2);
   color: white;
   text-align: center;
   padding: 20px 0;
@@ -13,5 +13,5 @@
 .footer-link {
   text-decoration: none;
   cursor: pointer;
-  color: #00a0c6;
+  color: var(--color4);
 }
