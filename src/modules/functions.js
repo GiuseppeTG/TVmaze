@@ -1,11 +1,6 @@
 import axios from 'axios';
 import Swal from 'sweetalert2';
 
-// const totalInput = document.querySelector('.total');
-const commentsListContainer = document.querySelector('.comments-list');
-const nameInput = document.querySelector('#name');
-const commentInput = document.querySelector('#message');
-
 const BaseURL = 'https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps';
 const APP_ID = 'QC6bnLUQwMT9GlJ8wh3Z';
 
@@ -18,10 +13,6 @@ const addComment = async (name, comment, item_id = APP_ID) => {
     };
 
     await axios.post(`${BaseURL}/${APP_ID}/comments`, newComment);
-    commentsListContainer.innerHTML = '';
-    nameInput.value = '';
-    commentInput.value = '';
-
     return true;
   }
   return false;
@@ -88,9 +79,8 @@ const getModalContent = (
   const commentInput = document.querySelector('#message');
   document.querySelector('.form').addEventListener('submit', (e) => {
     addComment(nameInput.value, commentInput.value, itemID);
-    nameInput.value = '';
-    commentInput.value = '';
     e.preventDefault();
+    Swal.close();
   });
 };
 
