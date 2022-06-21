@@ -1,37 +1,47 @@
 import './style.css';
 import './footer.css';
 const AppId = 'ucRLpFwZl71GWbNyaaEC';
-const url = 'https://api.tvmaze.com';
+const ApiUrl = 'https://api.tvmaze.com';
+const form = document.querySelector('.search-form');
+const searchInput = document.querySelector('.search-input');
+const cardContainer = document.querySelector('.grid-container');
 
+//----- INIT -----//
 
+document.addEventListener('DOMContentLoaded', () => {
+  getSomeShows();
+});
 
-const getSearchedShows = async () => {
-  const response = await fetch(`${url}/search/shows?q=simpsons`);
+//----- API FUNCTIONS -----//
+
+const getSearchedShows = async (query) => {
+  const response = await fetch(`${ApiUrl}/search/shows?q=${query}`);
   const data = await response.json();
-  return data
+  data.forEach(TvShow => UI.renderCard(TvShow.show.name, TvShow.show.image.medium));  
 }
 
 const getSomeShows = async () => {
-  const response = await fetch(`${url}/show`);
+  const response = await fetch(`${ApiUrl}/show`);
   let data = await response.json();
+  // console.log(data)
   let someShows = data.slice(0, 9);
-  return someShows
+  someShows.forEach(show => UI.renderCard(show.name, show.image.medium))
 }
 
-getSearchedShows();
+//----- SEARCH -----//
 
-getSomeShows();
+form.addEventListener('submit', () => {
+  cardContainer.innerHTML = null;
+  getSearchedShows(searchInput.value)
+  searchInput.value = null;
+})
+
 
 // -----CARD----- //
 
 class UI {
-  static renderCard = (imgUrl, title, likesCounter) => {
-    imgUrl = 'https://static.tvmaze.com/uploads/images/medium_portrait/359/898433.jpg';
-    title = 'Simpsons Simpsons Simpsons Simpsons'
-    likesCounter = '123'
-
-    const cardContainer = document.querySelector('.grid-container');
-
+  static renderCard = (title, imgUrl, likesCounter = '123') => {
+    
     const card = document.createElement('div');
     card.classList.add('card');
 
@@ -63,6 +73,9 @@ class UI {
     const commentsButton = document.createElement('button');
     commentsButton.classList.add('comments-button');
     commentsButton.textContent = 'Comments';
+    // commentsButton.addEventListener('click', () => {
+    //   console.log(title)
+    // });
 
     cardContainer.append(card);
     card.append(imageContainer, itemInfo, commentsButton);
@@ -72,10 +85,3 @@ class UI {
     likesContainer.append(heart, likes);
   }
 }
-
-UI.renderCard();
-UI.renderCard();
-UI.renderCard();
-UI.renderCard();
-UI.renderCard();
-UI.renderCard();
