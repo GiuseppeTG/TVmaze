@@ -147,6 +147,4 @@ const displayModal = (
   });
 };
 
-export {
-  addComment, nameInput, commentInput, displayModal,
-};
+export default displayModal;

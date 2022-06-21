@@ -1,4 +1,4 @@
-import { displayModal } from './modules/functions.js';
+import displayModal from './modules/functions.js';
 import './style.css';
 import './modal-styles.css';
 
