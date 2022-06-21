@@ -6,17 +6,9 @@ const commentsListContainer = document.querySelector('.comments-list');
 const nameInput = document.querySelector('#name');
 const commentInput = document.querySelector('#message');
 
-const BaseURL = 'https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps';
+const BaseURL =
+  'https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps';
 const APP_ID = 'QC6bnLUQwMT9GlJ8wh3Z';
-
-const loadComments = async (itemID = APP_ID) => {
-  const { data } = await axios.request({
-    method: 'get',
-    url: `${BaseURL}/${APP_ID}/comments?item_id=${itemID}`,
-  });
-
-  return data;
-};
 
 const getModalContent = (
   imgURL,
@@ -25,7 +17,7 @@ const getModalContent = (
   weight,
   light,
   power,
-  totalComments,
+  totalComments
 ) => {
   Swal.fire({
     html: `
@@ -76,6 +68,22 @@ const getModalContent = (
   });
 };
 
+const fetchComments = async (itemID) => {
+  const response = await fetch(
+    `${BaseURL}/${APP_ID}/comments?item_id=${itemID}`
+  );
+  const data = await response.json();
+  return data;
+};
+
+const getTotalComments = async (itemID) => {
+  const response = await fetch(
+    `${BaseURL}/${APP_ID}/comments?item_id=${itemID}`
+  );
+  const data = await response.json();
+  return data.length;
+};
+
 const displayModal = (
   imgURL = 'https://dailyguidenetwork.com/wp-content/uploads/2021/04/SIsta-Afia-620x406.jpg',
   name = 'John legend',
@@ -83,20 +91,25 @@ const displayModal = (
   fuel = 'titanium',
   weight = 1324567890,
   light = 897654678,
-  power = 7654,
+  power = 7654
 ) => {
-  fetch(`${BaseURL}/${APP_ID}/comments?item_id=${itemID}`)
-    .then((response) => response.json())
-    .then((data) => {
-      data.forEach((item) => {
-        const li = document.createElement('li');
-        li.className = 'comment';
-        li.textContent = `${item.creation_date} ${item.username}: ${item.comment}`;
-      });
+  // get total comments for one item
+  let totalComments = 0;
+  getTotalComments(itemID).then((data) => {
+    totalComments = data;
+  });
 
-      const totalComments = data.length;
-      getModalContent(imgURL, name, fuel, weight, light, power, totalComments);
+  // fethch comments for one item
+  fetchComments(itemID).then((data) => {
+    data.forEach((item) => {
+      const li = document.createElement('li');
+      li.className = 'comment';
+      li.textContent = `${item.creation_date} ${item.username}: ${item.comment}`;
     });
+
+    // dynamically display the content of the modal
+    getModalContent(imgURL, name, fuel, weight, light, power, totalComments);
+  });
 };
 
 const addComment = async (name, comment, item_id = APP_ID) => {
@@ -111,13 +124,10 @@ const addComment = async (name, comment, item_id = APP_ID) => {
     commentsListContainer.innerHTML = '';
     nameInput.value = '';
     commentInput.value = '';
-    loadComments();
 
     return true;
   }
   return false;
 };
 
-export {
-  loadComments, addComment, nameInput, commentInput, displayModal,
-};
+export { addComment, nameInput, commentInput, displayModal };
