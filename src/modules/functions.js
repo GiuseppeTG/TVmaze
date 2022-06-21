@@ -9,6 +9,24 @@ const commentInput = document.querySelector('#message');
 const BaseURL = 'https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps';
 const APP_ID = 'QC6bnLUQwMT9GlJ8wh3Z';
 
+const addComment = async (name, comment, item_id = APP_ID) => {
+  if (name && comment) {
+    const newComment = {
+      item_id,
+      username: `${name}`,
+      comment: `${comment}`,
+    };
+
+    await axios.post(`${BaseURL}/${APP_ID}/comments`, newComment);
+    commentsListContainer.innerHTML = '';
+    nameInput.value = '';
+    commentInput.value = '';
+
+    return true;
+  }
+  return false;
+};
+
 const getModalContent = (
   imgURL,
   name,
@@ -17,6 +35,7 @@ const getModalContent = (
   light,
   power,
   totalComments,
+  itemID,
 ) => {
   Swal.fire({
     html: `
@@ -41,7 +60,7 @@ const getModalContent = (
       </div>
       <div class="comment-form">
         <h3 class="form-header">Add a comment</h3>
-        <div class="form">
+        <form action="#" method="post" class="form">
           <input
             type="text"
             name="name"
@@ -59,11 +78,19 @@ const getModalContent = (
             class="textarea-input"
           ></textarea>
           <input type="submit" value="Comment" class="btn" id="submit-form" />
-        </div>
+        </form>
       </div>
     </div>
       `,
     showCloseButton: true,
+  });
+  const nameInput = document.querySelector('#name');
+  const commentInput = document.querySelector('#message');
+  document.querySelector('.form').addEventListener('submit', (e) => {
+    addComment(nameInput.value, commentInput.value, itemID);
+    nameInput.value = '';
+    commentInput.value = '';
+    e.preventDefault();
   });
 };
 
@@ -96,37 +123,28 @@ const displayModal = (
   let totalComments = 0;
   getTotalComments(itemID).then((data) => {
     totalComments = data;
-  });
 
-  // fethch comments for one item
-  fetchComments(itemID).then((data) => {
-    data.forEach((item) => {
-      const li = document.createElement('li');
-      li.className = 'comment';
-      li.textContent = `${item.creation_date} ${item.username}: ${item.comment}`;
+    // fethch comments for one item
+    fetchComments(itemID).then((data) => {
+      data.forEach((item) => {
+        const li = document.createElement('li');
+        li.className = 'comment';
+        li.textContent = `${item.creation_date} ${item.username}: ${item.comment}`;
+      });
+
+      // dynamically display the content of the modal
+      getModalContent(
+        imgURL,
+        name,
+        fuel,
+        weight,
+        light,
+        power,
+        totalComments,
+        itemID,
+      );
     });
-
-    // dynamically display the content of the modal
-    getModalContent(imgURL, name, fuel, weight, light, power, totalComments);
   });
-};
-
-const addComment = async (name, comment, item_id = APP_ID) => {
-  if (name && comment) {
-    const newComment = {
-      item_id,
-      username: `${name}`,
-      comment: `${comment}`,
-    };
-
-    await axios.post(`${BaseURL}/${APP_ID}/comments`, newComment);
-    commentsListContainer.innerHTML = '';
-    nameInput.value = '';
-    commentInput.value = '';
-
-    return true;
-  }
-  return false;
 };
 
 export {
