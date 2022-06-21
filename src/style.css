@@ -88,36 +88,78 @@ nav {
 }
 
 .grid-container {
-  border: green solid 2px;
   width: 80%;
   margin: auto;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: 30px;
 }
 
 .card {
-  border: red solid 2px;
-  height: 300px;
+  border-radius: 5px;
+  background-color: #1f2833;
+  height: fit-content;
   display: flex;
   flex-direction: column;
   gap: 10px;
-  padding: 10px;
+  padding: 30px;
+  box-shadow: 0 0 8px 0px rgb(0, 0, 0)
 }
 
 .image-container {
-  border: blue solid 2px;
+  background-color: #0b0c10;
   width: 100%;
   height: 200px;
+  margin: 0 auto;
+  cursor: pointer;
+}
+
+.item-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+
 }
 
 .item-info {
+  height: fit-content;
+  width: 100%;
   display: flex;
   justify-content: space-between;
+  color: white;
+  
+}
+
+.likes-container {
+  display: flex;
+  gap: 10px;
+}
+
+.fa-heart {
+  color: rgb(148, 148, 148);
+  cursor: pointer;
+  transition: 0.5s;
+}
+
+.fa-heart:hover {
+  color: rgb(250, 53, 53);
 }
 
 .comments-button {
   display: block;
   margin: auto;
   padding: 10px;
+  background-color: transparent;
+  border: #66fcf1 solid 1px;
+  border-radius: 3px;
+  color: white;
+  cursor: pointer;
+  transition: 1s;
+}
+
+.comments-button:hover {
+  background-color: #66fcf1;
+  color: #0b0c10;
+  border: none;
+  box-shadow: 0 0 8px 0px rgba(199, 199, 199, 0.2);
 }
