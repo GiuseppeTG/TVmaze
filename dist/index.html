@@ -10,88 +10,41 @@
     <title>TV shows</title>
   <script defer src="main.js"></script></head>
   <body>
-<<<<<<< HEAD
-    <h1>Display</h1>
-    <button class="btn modal-btn" data-modal-target="#modal">
-      Open pop up
-    </button>
-    <div class="model-container">
-      <div class="modal-img-container">
-        <img class="modal-img" src="../src/imgs/test-img.jpg" alt="modal" />
-        <h3 class="modal-header">Space 3</h3>
-      </div>
-      <div class="modal-detail-container">
-        <p class="detail">Fuel: titanium</p>
-        <p class="detail">Light: 100,000</p>
-        <p class="detail">Weight: 400</p>
-        <p class="detail">Power: 100,000</p>
-      </div>
-
-      <div class="comments-container">
-        <div class="comment-header-container">
-          <h3 class="comment-header">Comments</h3>
-          <span class="total">0</span>
-        </div>
-        <ul class="comments-list"></ul>
-      </div>
-      <div class="comment-form">
-        <h3 class="form-header">Add a comment</h3>
-        <form action="#" class="form">
-          <input
-            type="text"
-            name="name"
-            id="name"
-            placeholder="Your name"
-            class="name-input"
-            required
-          />
-          <textarea
-            name="comment"
-            required
-            id="message"
-            rows="4"
-            placeholder="Your insights"
-            class="textarea-input"
-          ></textarea>
-          <input type="submit" value="Comment" class="btn" />
-        </form>
-      </div>
-    </div>
-=======
     <header>
       <nav>
         <div class="logo">
-          <i class="fa-solid fa-tv"></i>
-          <p>TV SHOWS</p>
+          <a href="#homepage">
+            <i class="fa-solid fa-tv"></i>
+            <p>TV SHOWS</p>
+          </a>
         </div>
         <ul class="links">
-          <li><a href="homepage">Homepage</a></li>
-          <li><a href="homepage">About Us</a></li>
-          <li><a href="homepage">Downloads</a></li>
+          <li><a href="#homepage">Homepage</a></li>
+          <li><a href="#homepage">About Us</a></li>
+          <li><a href="#homepage">Downloads</a></li>
         </ul>
       </nav>
     </header>
-    <div class="title">
+
+    <form action="#" class="search-form">
+      <div class="search-box">
+        <input type="text" placeholder="Search..." class="search-input">
+        <a href="">
+          <i class="fa-solid fa-magnifying-glass"></i>
+        </a>
+      </div>
+    </form>
+
+    <div class="title" id="homepage">
       <h1>TV SHOWS</h1>
-      <p class="secondary-text">All the best TV shows available here for you. Comment and like them!</p>
+      <p class="secondary-text">
+        All the best TV shows available here for you. Comment and like them!
+      </p>
     </div>
-
+    <button class="launchAnotherModal">Alert</button>
     <div class="grid-container">
-      <div class="card">
-        <div class="image-container">
-          <img src="" alt="" class="item-img" />
-        </div>
-        <div class="item-info">
-          <h2 class="item-title">Friends</h2>
-          <div>
-            <i class="fa-solid fa-heart"></i>
-            <span class="likes-counter">123</span>
-          </div>
-        </div>
-        <button class="comments-button">Comments</button>
-      </div>
 
-      <div class="card">
+      <!-- <div class="card">
         <div class="image-container">
           <img src="" alt="" class="item-img" />
         </div>
@@ -103,64 +56,12 @@
           </div>
         </div>
         <button class="comments-button">Comments</button>
-      </div>
+      </div> -->
 
-      <div class="card">
-        <div class="image-container">
-          <img src="" alt="" class="item-img" />
-        </div>
-        <div class="item-info">
-          <h2 class="item-title">Friends</h2>
-          <div>
-            <i class="fa-solid fa-heart"></i>
-            <span class="likes-counter">123</span>
-          </div>
-        </div>
-        <button class="comments-button">Comments</button>
-      </div>
-
-      <div class="card">
-        <div class="image-container">
-          <img src="" alt="" class="item-img" />
-        </div>
-        <div class="item-info">
-          <h2 class="item-title">Friends</h2>
-          <div>
-            <i class="fa-solid fa-heart"></i>
-            <span class="likes-counter">123</span>
-          </div>
-        </div>
-        <button class="comments-button">Comments</button>
-      </div>
-
-      <div class="card">
-        <div class="image-container">
-          <img src="" alt="" class="item-img" />
-        </div>
-        <div class="item-info">
-          <h2 class="item-title">Friends</h2>
-          <div>
-            <i class="fa-solid fa-heart"></i>
-            <span class="likes-counter">123</span>
-          </div>
-        </div>
-        <button class="comments-button">Comments</button>
-      </div>
-
-      <div class="card">
-        <div class="image-container">
-          <img src="" alt="" class="item-img" />
-        </div>
-        <div class="item-info">
-          <h2 class="item-title">Friends</h2>
-          <div>
-            <i class="fa-solid fa-heart"></i>
-            <span class="likes-counter">123</span>
-          </div>
-        </div>
-        <button class="comments-button">Comments</button>
-      </div>
+      <!-- more cards -->
+      
     </div>
+
     <footer class="footer">
       <p>
         &copy; Created By
@@ -174,6 +75,5 @@
         as part of Microverse Bootcamp curriculum
       </p>
     </footer>
->>>>>>> e0aca4dbc813f7cdd0bca4dff98882c68e0d5d0a
   </body>
 </html>
