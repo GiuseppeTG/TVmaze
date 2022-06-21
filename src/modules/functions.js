@@ -1,8 +1,7 @@
 import axios from 'axios';
 import Swal from 'sweetalert2';
 
-const BaseURL =
-  'https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps';
+const BaseURL = 'https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps';
 const APP_ID = 'QC6bnLUQwMT9GlJ8wh3Z';
 
 const addComment = async (name, comment, itemID) => {
@@ -21,7 +20,7 @@ const addComment = async (name, comment, itemID) => {
 
 const fetchComments = async (itemID) => {
   const response = await fetch(
-    `${BaseURL}/${APP_ID}/comments?item_id=${itemID}`
+    `${BaseURL}/${APP_ID}/comments?item_id=${itemID}`,
   );
   const data = await response.json();
   return data.length ? data : [];
@@ -35,7 +34,7 @@ const getModalContent = (
   light,
   power,
   totalComments,
-  itemID
+  itemID,
 ) => {
   Swal.fire({
     html: `
@@ -108,7 +107,7 @@ const getModalContent = (
 
 const getTotalComments = async (itemID) => {
   const response = await fetch(
-    `${BaseURL}/${APP_ID}/comments?item_id=${itemID}`
+    `${BaseURL}/${APP_ID}/comments?item_id=${itemID}`,
   );
   const data = await response.json();
   return data.length === undefined ? 0 : data.length;
@@ -130,7 +129,7 @@ const displayModal = (imgURL, name, itemID, fuel, weight, light, power) => {
       light,
       power,
       totalComments,
-      itemID
+      itemID,
     );
   });
 };
