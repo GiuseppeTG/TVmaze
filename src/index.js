@@ -1,53 +1,21 @@
 import './style.css';
 import './footer.css';
-const AppId = 'ucRLpFwZl71GWbNyaaEC';
+
+// const AppId = 'ucRLpFwZl71GWbNyaaEC';
 const ApiUrl = 'https://api.tvmaze.com';
 const form = document.querySelector('.search-form');
 const searchInput = document.querySelector('.search-input');
 const cardContainer = document.querySelector('.grid-container');
 
-//----- INIT -----//
-
-document.addEventListener('DOMContentLoaded', () => {
-  getSomeShows();
-});
-
-//----- API FUNCTIONS -----//
-
-const getSearchedShows = async (query) => {
-  const response = await fetch(`${ApiUrl}/search/shows?q=${query}`);
-  const data = await response.json();
-  data.forEach(TvShow => UI.renderCard(TvShow.show.name, TvShow.show.image.medium));  
-}
-
-const getSomeShows = async () => {
-  const response = await fetch(`${ApiUrl}/show`);
-  let data = await response.json();
-  // console.log(data)
-  let someShows = data.slice(0, 9);
-  someShows.forEach(show => UI.renderCard(show.name, show.image.medium))
-}
-
-//----- SEARCH -----//
-
-form.addEventListener('submit', () => {
-  cardContainer.innerHTML = null;
-  getSearchedShows(searchInput.value)
-  searchInput.value = null;
-})
-
-
 // -----CARD----- //
 
 class UI {
   static renderCard = (title, imgUrl, likesCounter = '123') => {
-    
     const card = document.createElement('div');
     card.classList.add('card');
 
     const imageContainer = document.createElement('div');
     imageContainer.classList.add('image-container');
-    
 
     const image = document.createElement('img');
     image.classList.add('item-img');
@@ -79,9 +47,39 @@ class UI {
 
     cardContainer.append(card);
     card.append(imageContainer, itemInfo, commentsButton);
-    
+
     imageContainer.append(image);
     itemInfo.append(itemTitle, likesContainer);
     likesContainer.append(heart, likes);
   }
 }
+
+// ----- API FUNCTIONS -----//
+
+const getSearchedShows = async (query) => {
+  const response = await fetch(`${ApiUrl}/search/shows?q=${query}`);
+  const data = await response.json();
+  data.forEach((TvShow) => UI.renderCard(TvShow.show.name, TvShow.show.image.medium));
+};
+
+const getSomeShows = async () => {
+  const response = await fetch(`${ApiUrl}/show`);
+  const data = await response.json();
+  // console.log(data)
+  const someShows = data.slice(0, 9);
+  someShows.forEach((show) => UI.renderCard(show.name, show.image.medium));
+};
+
+// ----- SEARCH -----//
+
+form.addEventListener('submit', () => {
+  cardContainer.innerHTML = null;
+  getSearchedShows(searchInput.value);
+  searchInput.value = null;
+});
+
+// ----- INIT -----//
+
+document.addEventListener('DOMContentLoaded', () => {
+  getSomeShows();
+});
