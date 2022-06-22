@@ -12,7 +12,13 @@ const cardContainer = document.querySelector('.grid-container');
 // -----CARD----- //
 
 class UI {
-  static renderCard = (title, imgUrl, itemID, likesCounter = '123') => {
+  static renderCard = (
+    title,
+    imgUrl,
+    itemID,
+    summary,
+    likesCounter = '123',
+  ) => {
     const card = document.createElement('div');
     card.classList.add('card');
 
@@ -44,7 +50,7 @@ class UI {
     commentsButton.classList.add('comments-button');
     commentsButton.textContent = 'Comments';
     commentsButton.addEventListener('click', () => {
-      displayModal(imgUrl, title, itemID, 'Total', 4556789, 89, 89);
+      displayModal(imgUrl, title, itemID, summary);
     });
 
     cardContainer.append(card);
@@ -62,7 +68,12 @@ const getSearchedShows = async (query) => {
   const response = await fetch(`${ApiUrl}/search/shows?q=${query}`);
   const data = await response.json();
   data.forEach((TvShow) => {
-    UI.renderCard(TvShow.show.name, TvShow.show.image.medium, TvShow.show.id);
+    UI.renderCard(
+      TvShow.show.name,
+      TvShow.show.image.medium,
+      TvShow.show.id,
+      TvShow.show.summary,
+    );
   });
 };
 
@@ -70,7 +81,7 @@ const getSomeShows = async () => {
   const response = await fetch(`${ApiUrl}/show`);
   const data = await response.json();
   const someShows = data.slice(0, 9);
-  someShows.forEach((show) => UI.renderCard(show.name, show.image.medium, show.id));
+  someShows.forEach((show) => UI.renderCard(show.name, show.image.medium, show.id, show.summary));
 };
 
 // ----- SEARCH -----//

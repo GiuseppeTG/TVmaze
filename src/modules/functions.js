@@ -26,16 +26,7 @@ const fetchComments = async (itemID) => {
   return data.length ? data : [];
 };
 
-const getModalContent = (
-  imgURL,
-  name,
-  fuel,
-  weight,
-  light,
-  power,
-  totalComments,
-  itemID,
-) => {
+const getModalContent = (imgURL, name, summary, totalComments, itemID) => {
   Swal.fire({
     html: `
        <div class="model-container">
@@ -44,10 +35,7 @@ const getModalContent = (
         <h3 class="modal-header">${name}</h3>
       </div>
       <div class="modal-detail-container">
-        <p class="detail">Fuel: ${fuel}</p>
-        <p class="detail">Light: ${light}</p>
-        <p class="detail">Weight: ${weight}</p>
-        <p class="detail">Power: ${power}</p>
+        ${summary}
       </div>
 
       <div class="comments-container">
@@ -113,7 +101,7 @@ const getTotalComments = async (itemID) => {
   return data.length === undefined ? 0 : data.length;
 };
 
-const displayModal = (imgURL, name, itemID, fuel, weight, light, power) => {
+const displayModal = (imgURL, name, itemID, summary) => {
   // get total comments for one item
   let totalComments = 0;
   getTotalComments(itemID).then((data) => {
@@ -121,16 +109,7 @@ const displayModal = (imgURL, name, itemID, fuel, weight, light, power) => {
 
     // fethch comments for one item
 
-    getModalContent(
-      imgURL,
-      name,
-      fuel,
-      weight,
-      light,
-      power,
-      totalComments,
-      itemID,
-    );
+    getModalContent(imgURL, name, summary, totalComments, itemID);
   });
 };
 
