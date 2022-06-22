@@ -1,5 +1,4 @@
-import { addLike } from './likes.js';
-import { getTotalLikes } from './likes.js';
+import { addLike, getTotalLikes } from './likes.js';
 import displayModal from './modal.js';
 
 const cardContainer = document.querySelector('.grid-container');
@@ -7,7 +6,7 @@ const cardContainer = document.querySelector('.grid-container');
 class UI {
   static renderCard = (title, imgUrl, itemID, summary) => {
     let likesCount = 0;
-    
+
     const card = document.createElement('div');
     card.classList.add('card');
 
@@ -48,13 +47,13 @@ class UI {
     imageContainer.append(image);
     itemInfo.append(itemTitle, likesContainer);
     likesContainer.append(heart);
-    
+
     getTotalLikes(itemID).then((data) => {
       likesCount = data;
       const likes = document.createElement('span');
       likes.classList.add('likes-counter');
       likes.textContent = likesCount;
-      likesContainer.append(likes);       
+      likesContainer.append(likes);
     });
   };
 
