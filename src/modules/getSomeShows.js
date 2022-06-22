@@ -6,10 +6,10 @@ const getSomeShows = async () => {
   const data = await response.json();
   const someShows = data.slice(0, 9);
   someShows.forEach((data) => {
-    if(data.image !== null){
-      UI.renderCard(data.name, data.image.medium, data.id, data.summary)
+    if (data.image !== null) {
+      UI.renderCard(data.name, data.image.medium, data.id, data.summary);
     }
-  })
+  });
   UI.itemCounter();
 };
 
