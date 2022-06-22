@@ -1,5 +1,4 @@
 import './style.css';
-import './footer.css';
 import searchedShows from './modules/search.js';
 import getSomeShows from './modules/getSomeShows.js';
 
