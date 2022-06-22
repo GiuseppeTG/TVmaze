@@ -1,6 +1,8 @@
+import displayModal from './modules/functions.js';
 import './style.css';
 import './footer.css';
 import { getTotalLikes, addLike } from './likes.js';
+import './modal-styles.css';
 
 // const AppId = 'ucRLpFwZl71GWbNyaaEC';
 const ApiUrl = 'https://api.tvmaze.com';
@@ -11,10 +13,11 @@ const cardContainer = document.querySelector('.grid-container');
 // -----CARD----- //
 
 class UI {
-  static renderCard = (title, imgUrl, itemID) => {
-    // get comment count from db
-    let likesCount = 0;
+  static renderCard = (title, imgUrl, itemID, summary) => {
+    const card = document.createElement('div');
+    card.classList.add('card');
 
+    let likesCount = 0;
     getTotalLikes(itemID).then((data) => {
       likesCount = data;
 
@@ -41,19 +44,20 @@ class UI {
       const heart = document.createElement('i');
       heart.classList.add('fa-solid', 'fa-heart');
 
+      const commentsButton = document.createElement('button');
+      commentsButton.classList.add('comments-button');
+      commentsButton.textContent = 'Comments';
+      commentsButton.addEventListener('click', () => {
+        displayModal(imgUrl, title, itemID, summary);
+      });
+
       const likes = document.createElement('span');
       likes.classList.add('likes-counter');
       likes.textContent = likesCount;
 
       heart.addEventListener('click', () => {
-        likesCount += 1;
         addLike(itemID).then((data) => data);
       });
-
-      const commentsButton = document.createElement('button');
-      commentsButton.classList.add('comments-button');
-      commentsButton.textContent = 'Comments';
-      commentsButton.addEventListener('click', () => {});
 
       cardContainer.append(card);
       card.append(imageContainer, itemInfo, commentsButton);
@@ -72,15 +76,20 @@ const getSearchedShows = async (query) => {
   const data = await response.json();
   data.forEach((TvShow) => {
     UI.renderCard(TvShow.show.name, TvShow.show.image.medium, TvShow.show.id);
+    UI.renderCard(
+      TvShow.show.name,
+      TvShow.show.image.medium,
+      TvShow.show.id,
+      TvShow.show.summary,
+    );
   });
 };
 
 const getSomeShows = async () => {
   const response = await fetch(`${ApiUrl}/show`);
   const data = await response.json();
-  // console.log(data)
   const someShows = data.slice(0, 9);
-  someShows.forEach((show) => UI.renderCard(show.name, show.image.medium, show.id));
+  someShows.forEach((show) => UI.renderCard(show.name, show.image.medium, show.id, show.summary));
 };
 
 // ----- SEARCH -----//
