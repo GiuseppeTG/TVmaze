@@ -1,11 +1,9 @@
 import axios from 'axios';
 
-const BaseURL =
-  'https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps';
+const BaseURL = 'https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps';
 const APP_ID = 'un4IMXxgYWzcZxzqDkPT';
 
 const addLike = async (itemID) => {
-  console.log('i was called ', itemID);
   if (itemID) {
     const newLike = {
       item_id: itemID,

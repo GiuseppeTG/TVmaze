@@ -70,9 +70,9 @@ class UI {
 const getSearchedShows = async (query) => {
   const response = await fetch(`${ApiUrl}/search/shows?q=${query}`);
   const data = await response.json();
-  data.forEach((TvShow) =>
-    UI.renderCard(TvShow.show.name, TvShow.show.image.medium, TvShow.show.id)
-  );
+  data.forEach((TvShow) => {
+    UI.renderCard(TvShow.show.name, TvShow.show.image.medium, TvShow.show.id);
+  });
 };
 
 const getSomeShows = async () => {
@@ -80,9 +80,7 @@ const getSomeShows = async () => {
   const data = await response.json();
   // console.log(data)
   const someShows = data.slice(0, 9);
-  someShows.forEach((show) =>
-    UI.renderCard(show.name, show.image.medium, show.id)
-  );
+  someShows.forEach((show) => UI.renderCard(show.name, show.image.medium, show.id));
 };
 
 // ----- SEARCH -----//
