@@ -52,6 +52,12 @@ class UI {
     itemInfo.append(itemTitle, likesContainer);
     likesContainer.append(heart, likes);
   }
+
+  static itemCounter = () => {
+    let count = cardContainer.childElementCount;
+    const itemCounter = document.querySelector('.item-counter');
+    itemCounter.textContent = `Displaying ${count} shows:`;
+  }
 }
 
 // ----- API FUNCTIONS -----//
@@ -59,15 +65,24 @@ class UI {
 const getSearchedShows = async (query) => {
   const response = await fetch(`${ApiUrl}/search/shows?q=${query}`);
   const data = await response.json();
-  data.forEach((TvShow) => UI.renderCard(TvShow.show.name, TvShow.show.image.medium));
+  data.forEach((TvShow) => {
+    if(TvShow.show.image !== null){
+      UI.renderCard(TvShow.show.name, TvShow.show.image.medium)
+    }
+  });
+  UI.itemCounter();
 };
 
 const getSomeShows = async () => {
   const response = await fetch(`${ApiUrl}/show`);
   const data = await response.json();
-  // console.log(data)
-  const someShows = data.slice(0, 9);
-  someShows.forEach((show) => UI.renderCard(show.name, show.image.medium));
+  const someShows = data.slice(0, 10);
+  someShows.forEach((show) => {
+    if(show.image !== null){
+      UI.renderCard(show.name, show.image.medium)
+    }
+  })
+  UI.itemCounter();
 };
 
 // ----- SEARCH -----//
@@ -81,5 +96,5 @@ form.addEventListener('submit', () => {
 // ----- INIT -----//
 
 document.addEventListener('DOMContentLoaded', () => {
-  getSomeShows();
+  getSomeShows(); 
 });
