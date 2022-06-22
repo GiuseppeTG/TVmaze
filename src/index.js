@@ -1,6 +1,7 @@
 import displayModal from './modules/functions.js';
 import './style.css';
 import './footer.css';
+import { getTotalLikes, addLike } from './likes.js';
 import './modal-styles.css';
 
 // const AppId = 'ucRLpFwZl71GWbNyaaEC';
@@ -12,53 +13,59 @@ const cardContainer = document.querySelector('.grid-container');
 // -----CARD----- //
 
 class UI {
-  static renderCard = (
-    title,
-    imgUrl,
-    itemID,
-    summary,
-    likesCounter = '123',
-  ) => {
+  static renderCard = (title, imgUrl, itemID, summary) => {
     const card = document.createElement('div');
     card.classList.add('card');
 
-    const imageContainer = document.createElement('div');
-    imageContainer.classList.add('image-container');
+    let likesCount = 0;
+    getTotalLikes(itemID).then((data) => {
+      likesCount = data;
 
-    const image = document.createElement('img');
-    image.classList.add('item-img');
-    image.src = imgUrl;
+      const card = document.createElement('div');
+      card.classList.add('card');
 
-    const itemInfo = document.createElement('div');
-    itemInfo.classList.add('item-info');
+      const imageContainer = document.createElement('div');
+      imageContainer.classList.add('image-container');
 
-    const itemTitle = document.createElement('h2');
-    itemTitle.classList.add('item-title');
-    itemTitle.innerText = title;
+      const image = document.createElement('img');
+      image.classList.add('item-img');
+      image.src = imgUrl;
 
-    const likesContainer = document.createElement('div');
-    likesContainer.classList.add('likes-container');
+      const itemInfo = document.createElement('div');
+      itemInfo.classList.add('item-info');
 
-    const heart = document.createElement('i');
-    heart.classList.add('fa-solid', 'fa-heart');
+      const itemTitle = document.createElement('h2');
+      itemTitle.classList.add('item-title');
+      itemTitle.innerText = title;
 
-    const likes = document.createElement('span');
-    likes.classList.add('likes-counter');
-    likes.textContent = likesCounter;
+      const likesContainer = document.createElement('div');
+      likesContainer.classList.add('likes-container');
 
-    const commentsButton = document.createElement('button');
-    commentsButton.classList.add('comments-button');
-    commentsButton.textContent = 'Comments';
-    commentsButton.addEventListener('click', () => {
-      displayModal(imgUrl, title, itemID, summary);
+      const heart = document.createElement('i');
+      heart.classList.add('fa-solid', 'fa-heart');
+
+      const commentsButton = document.createElement('button');
+      commentsButton.classList.add('comments-button');
+      commentsButton.textContent = 'Comments';
+      commentsButton.addEventListener('click', () => {
+        displayModal(imgUrl, title, itemID, summary);
+      });
+
+      const likes = document.createElement('span');
+      likes.classList.add('likes-counter');
+      likes.textContent = likesCount;
+
+      heart.addEventListener('click', () => {
+        addLike(itemID).then((data) => data);
+      });
+
+      cardContainer.append(card);
+      card.append(imageContainer, itemInfo, commentsButton);
+
+      imageContainer.append(image);
+      itemInfo.append(itemTitle, likesContainer);
+      likesContainer.append(heart, likes);
     });
-
-    cardContainer.append(card);
-    card.append(imageContainer, itemInfo, commentsButton);
-
-    imageContainer.append(image);
-    itemInfo.append(itemTitle, likesContainer);
-    likesContainer.append(heart, likes);
   };
 }
 
@@ -68,6 +75,7 @@ const getSearchedShows = async (query) => {
   const response = await fetch(`${ApiUrl}/search/shows?q=${query}`);
   const data = await response.json();
   data.forEach((TvShow) => {
+    UI.renderCard(TvShow.show.name, TvShow.show.image.medium, TvShow.show.id);
     UI.renderCard(
       TvShow.show.name,
       TvShow.show.image.medium,
