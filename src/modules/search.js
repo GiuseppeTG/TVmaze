@@ -6,7 +6,7 @@ const searchedShows = async (query) => {
   const data = await response.json();
   data.forEach((data) => {
     if (data.show.image !== null) {
-      UI.renderCard(data.show.name, data.show.image.medium);
+      UI.renderCard(data.show.name, data.show.image.medium, data.show.id, data.show.summary);
     }
   });
   UI.itemCounter();
