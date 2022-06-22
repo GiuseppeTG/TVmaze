@@ -17,7 +17,7 @@ const addComment = async (name, comment, itemID) => {
 
 const fetchComments = async (itemID) => {
   const response = await fetch(
-    `${BASE_URL}/${APP_ID}/comments?item_id=${itemID}`
+    `${BASE_URL}/${APP_ID}/comments?item_id=${itemID}`,
   );
   const data = await response.json();
   return data.length ? data : [];
@@ -26,7 +26,7 @@ const fetchComments = async (itemID) => {
 const getTotalComments = async (itemID) => {
   if (itemID) {
     const response = await fetch(
-      `${BASE_URL}/${APP_ID}/comments?item_id=${itemID}`
+      `${BASE_URL}/${APP_ID}/comments?item_id=${itemID}`,
     );
     const data = await response.json();
     return data.length === undefined ? 0 : data.length;
