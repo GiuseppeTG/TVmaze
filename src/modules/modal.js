@@ -1,30 +1,5 @@
-import axios from 'axios';
 import Swal from 'sweetalert2';
-
-const BaseURL = 'https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps';
-const APP_ID = 'QC6bnLUQwMT9GlJ8wh3Z';
-
-const addComment = async (name, comment, itemID) => {
-  if (name && comment) {
-    const newComment = {
-      item_id: itemID,
-      username: `${name}`,
-      comment: `${comment}`,
-    };
-
-    await axios.post(`${BaseURL}/${APP_ID}/comments`, newComment);
-    return true;
-  }
-  return false;
-};
-
-const fetchComments = async (itemID) => {
-  const response = await fetch(
-    `${BaseURL}/${APP_ID}/comments?item_id=${itemID}`,
-  );
-  const data = await response.json();
-  return data.length ? data : [];
-};
+import { getTotalComments, fetchComments, addComment } from './comments.js';
 
 const getModalContent = (imgURL, name, summary, totalComments, itemID) => {
   Swal.fire({
@@ -93,22 +68,11 @@ const getModalContent = (imgURL, name, summary, totalComments, itemID) => {
   });
 };
 
-const getTotalComments = async (itemID) => {
-  const response = await fetch(
-    `${BaseURL}/${APP_ID}/comments?item_id=${itemID}`,
-  );
-  const data = await response.json();
-  return data.length === undefined ? 0 : data.length;
-};
-
 const displayModal = (imgURL, name, itemID, summary) => {
   // get total comments for one item
   let totalComments = 0;
   getTotalComments(itemID).then((data) => {
     totalComments = data;
-
-    // fethch comments for one item
-
     getModalContent(imgURL, name, summary, totalComments, itemID);
   });
 };
