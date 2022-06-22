@@ -1,11 +1,11 @@
-import displayModal from './modules/functions.js';
+import displayModal from './modules/modal.js';
 import './style.css';
 import './footer.css';
-import { getTotalLikes, addLike } from './likes.js';
+import { getTotalLikes, addLike } from './modules/likes.js';
 import './modal-styles.css';
+import { TV_API_URL } from './modules/utils.js';
 
 // const AppId = 'ucRLpFwZl71GWbNyaaEC';
-const ApiUrl = 'https://api.tvmaze.com';
 const form = document.querySelector('.search-form');
 const searchInput = document.querySelector('.search-input');
 const cardContainer = document.querySelector('.grid-container');
@@ -72,7 +72,7 @@ class UI {
 // ----- API FUNCTIONS -----//
 
 const getSearchedShows = async (query) => {
-  const response = await fetch(`${ApiUrl}/search/shows?q=${query}`);
+  const response = await fetch(`${TV_API_URL}/search/shows?q=${query}`);
   const data = await response.json();
   data.forEach((TvShow) => {
     UI.renderCard(TvShow.show.name, TvShow.show.image.medium, TvShow.show.id);
@@ -80,16 +80,18 @@ const getSearchedShows = async (query) => {
       TvShow.show.name,
       TvShow.show.image.medium,
       TvShow.show.id,
-      TvShow.show.summary,
+      TvShow.show.summary
     );
   });
 };
 
 const getSomeShows = async () => {
-  const response = await fetch(`${ApiUrl}/show`);
+  const response = await fetch(`${TV_API_URL}/show`);
   const data = await response.json();
   const someShows = data.slice(0, 9);
-  someShows.forEach((show) => UI.renderCard(show.name, show.image.medium, show.id, show.summary));
+  someShows.forEach((show) =>
+    UI.renderCard(show.name, show.image.medium, show.id, show.summary)
+  );
 };
 
 // ----- SEARCH -----//
