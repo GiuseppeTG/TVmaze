@@ -8,13 +8,13 @@ const searchedShows = async (query) => {
     DisplayCard.renderCard(
       data.show.name,
       data.show.image.medium,
-      data.show.id
+      data.show.id,
     );
     DisplayCard.renderCard(
       data.show.name,
       data.show.image.medium,
       data.show.id,
-      data.show.summary
+      data.show.summary,
     );
   });
 };
