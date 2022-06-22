@@ -12,6 +12,7 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@babel/plugin-transform-modules-commonjs": "^7.18.2",
     "babel-eslint": "^10.1.0",
     "css-loader": "^6.7.1",
     "eslint": "^7.32.0",
@@ -20,6 +21,7 @@
     "hint": "^6.2.0",
     "html-webpack-plugin": "^5.5.0",
     "jest": "^28.1.1",
+    "jest-environment-jsdom": "^28.1.1",
     "style-loader": "^3.3.1",
     "stylelint": "^13.13.1",
     "stylelint-config-standard": "^21.0.0",
@@ -32,5 +34,11 @@
   "dependencies": {
     "axios": "^0.27.2",
     "sweetalert2": "^11.4.18"
+  },
+  "jest": {
+    "moduleNameMapper": {
+      "\\.(jpg|jpeg|png|gif)$": "<rootDir>/__mocks__/fileMock.js",
+      "\\.(css)$": "<rootDir>/__mocks__/styleMock.js"
+    }
   }
 }
