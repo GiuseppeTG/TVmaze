@@ -1,5 +1,7 @@
+import displayModal from './modules/functions.js';
 import './style.css';
 import './footer.css';
+import './modal-styles.css';
 
 // const AppId = 'ucRLpFwZl71GWbNyaaEC';
 const ApiUrl = 'https://api.tvmaze.com';
@@ -10,7 +12,13 @@ const cardContainer = document.querySelector('.grid-container');
 // -----CARD----- //
 
 class UI {
-  static renderCard = (title, imgUrl, likesCounter = '123') => {
+  static renderCard = (
+    title,
+    imgUrl,
+    itemID,
+    summary,
+    likesCounter = '123',
+  ) => {
     const card = document.createElement('div');
     card.classList.add('card');
 
@@ -41,9 +49,9 @@ class UI {
     const commentsButton = document.createElement('button');
     commentsButton.classList.add('comments-button');
     commentsButton.textContent = 'Comments';
-    // commentsButton.addEventListener('click', () => {
-    //   console.log(title)
-    // });
+    commentsButton.addEventListener('click', () => {
+      displayModal(imgUrl, title, itemID, summary);
+    });
 
     cardContainer.append(card);
     card.append(imageContainer, itemInfo, commentsButton);
@@ -51,7 +59,7 @@ class UI {
     imageContainer.append(image);
     itemInfo.append(itemTitle, likesContainer);
     likesContainer.append(heart, likes);
-  }
+  };
 }
 
 // ----- API FUNCTIONS -----//
@@ -59,15 +67,21 @@ class UI {
 const getSearchedShows = async (query) => {
   const response = await fetch(`${ApiUrl}/search/shows?q=${query}`);
   const data = await response.json();
-  data.forEach((TvShow) => UI.renderCard(TvShow.show.name, TvShow.show.image.medium));
+  data.forEach((TvShow) => {
+    UI.renderCard(
+      TvShow.show.name,
+      TvShow.show.image.medium,
+      TvShow.show.id,
+      TvShow.show.summary,
+    );
+  });
 };
 
 const getSomeShows = async () => {
   const response = await fetch(`${ApiUrl}/show`);
   const data = await response.json();
-  // console.log(data)
   const someShows = data.slice(0, 9);
-  someShows.forEach((show) => UI.renderCard(show.name, show.image.medium));
+  someShows.forEach((show) => UI.renderCard(show.name, show.image.medium, show.id, show.summary));
 };
 
 // ----- SEARCH -----//
