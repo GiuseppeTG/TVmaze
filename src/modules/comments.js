@@ -24,11 +24,15 @@ const fetchComments = async (itemID) => {
 };
 
 const getTotalComments = async (itemID) => {
-  const response = await fetch(
-    `${BASE_URL}/${APP_ID}/comments?item_id=${itemID}`,
-  );
-  const data = await response.json();
-  return data.length === undefined ? 0 : data.length;
+  try {
+    const response = await fetch(
+      `${BASE_URL}/${APP_ID}/comments?item_id=${itemID}`,
+    );
+    const data = await response.json();
+    return data.length === undefined ? 0 : data.length;
+  } catch (error) {
+    return 0;
+  }
 };
 
 export { getTotalComments, fetchComments, addComment };

@@ -2,7 +2,7 @@
  * @jest-environment jsdom
  */
 
-import UI from '../modules/displayCard';
+import UI from '../modules/displayCard.js';
 
 test('counter of rendered items', () => {
   document.body.innerHTML = '<span class="item-counter"></span>'

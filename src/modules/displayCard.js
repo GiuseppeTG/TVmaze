@@ -5,9 +5,6 @@ class UI {
   static renderCard = (title, imgUrl, itemID, summary) => {
     const cardContainer = document.querySelector('.grid-container');
     let likesCount = 0;
-    //  getTotalLikes(itemID).then((data) => {
-    //    likesCount = data;
-
     const card = document.createElement('div');
     card.classList.add('card');
 
@@ -61,7 +58,6 @@ class UI {
   static itemCounter = () => {
     const cardContainer = document.querySelector('.grid-container');
     const count = cardContainer.childElementCount;
-    console.log(count);
     const itemCounter = document.querySelector('.item-counter');
     itemCounter.textContent = `Displaying ${count} shows:`;
   };
