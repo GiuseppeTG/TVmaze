@@ -1,3 +1,4 @@
+import countDisplayElements from './itemCounter.js';
 import { addLike, getTotalLikes } from './likes.js';
 import displayModal from './modal.js';
 
@@ -59,8 +60,9 @@ class UI {
 
   static itemCounter = () => {
     const count = cardContainer.childElementCount;
+    const results = countDisplayElements(count);
     const itemCounter = document.querySelector('.item-counter');
-    itemCounter.textContent = `Displaying ${count} shows:`;
+    itemCounter.textContent = results;
   };
 }
 
