@@ -4,6 +4,9 @@
 
 > In this project we built a webpage where the user can search for different TV shows, comment them and like them.
 
+![](./app_screenshot/homepage.png)
+![](./app_screenshot/modal.png)
+
 [Video](https://drive.google.com/file/d/1oIEWXL32SoS9nXczNdZc_bgM4KHWxMma/view?usp=sharing);
 
 ## Built With
