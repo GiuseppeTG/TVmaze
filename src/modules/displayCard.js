@@ -1,10 +1,10 @@
 import { addLike } from './likes.js';
 import displayModal from './modal.js';
 
-const cardContainer = document.querySelector('.grid-container');
 
 class UI {
   static renderCard = (title, imgUrl, itemID, summary) => {
+    const cardContainer = document.querySelector('.grid-container');
     const likesCount = 0;
     //  getTotalLikes(itemID).then((data) => {
     //    likesCount = data;
@@ -56,8 +56,11 @@ class UI {
     // });
   };
 
+  
   static itemCounter = () => {
+    const cardContainer = document.querySelector('.grid-container');
     const count = cardContainer.childElementCount;
+    console.log(count)
     const itemCounter = document.querySelector('.item-counter');
     itemCounter.textContent = `Displaying ${count} shows:`;
   };
