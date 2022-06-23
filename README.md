@@ -10,7 +10,7 @@
 - Technologies used: Webpack, VSCode, git, GitHub, Gitflow
 - API: https://api.tvmaze.com/show
 
-## Live Demo (if available)
+## Live Demo
 
 [Live Demo Link](https://giuseppetg.github.io/TVmaze/dist)
 
