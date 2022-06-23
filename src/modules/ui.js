@@ -35,8 +35,18 @@ class UI {
       displayModal(imgUrl, title, itemID, summary);
     });
 
-    heart.addEventListener('click', () => {
-      addLike(itemID).then((data) => data);
+    heart.addEventListener('click', (e) => {
+      
+      addLike(itemID).then(() => {
+        const likes = e.target.nextElementSibling;
+        likes.textContent = '';
+        getTotalLikes(itemID).then((data) => {
+          likesCount = data;
+          likes.classList.add('likes-counter');
+          likes.textContent = likesCount;
+          likesContainer.append(likes);
+        });
+      }) 
     });
 
     cardContainer.append(card);
@@ -50,6 +60,7 @@ class UI {
       likesCount = data;
       const likes = document.createElement('span');
       likes.classList.add('likes-counter');
+      likes.textContent = '';
       likes.textContent = likesCount;
       likesContainer.append(likes);
     });
