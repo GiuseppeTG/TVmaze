@@ -7,7 +7,7 @@
 ![](./app_screenshot/homepage.png)
 ![](./app_screenshot/modal.png)
 
-[Video](https://drive.google.com/file/d/1oIEWXL32SoS9nXczNdZc_bgM4KHWxMma/view?usp=sharing);
+[Video](https://drive.google.com/file/d/1oIEWXL32SoS9nXczNdZc_bgM4KHWxMma/view?usp=sharing)
 
 ## Built With
 
