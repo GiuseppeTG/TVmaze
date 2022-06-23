@@ -1,7 +1,7 @@
 import Swal from 'sweetalert2';
 import { getTotalComments, fetchComments, addComment } from './comments.js';
 
-const getModalContent = (imgURL, name, summary, totalComments, itemID) => {
+const getModalContent = (imgURL, name, summary, itemID) => {
   Swal.fire({
     html: `
       <div class="modal-container">
@@ -13,7 +13,7 @@ const getModalContent = (imgURL, name, summary, totalComments, itemID) => {
           ${summary}
         </div>
         <div class="comments-container">
-            <h3 class="comment-header">Comments (${totalComments})</h3>        
+            <h3 class="comment-header">Comments<span id="total-comments"></span></h3>        
           <ul class="comments-list"></ul>
         </div>
         <div class="comment-form">
@@ -30,6 +30,7 @@ const getModalContent = (imgURL, name, summary, totalComments, itemID) => {
   });
 
   fetchComments(itemID).then((data) => {
+    document.getElementById('total-comments').innerHTML = ' (' + data.length + ')';
     if (data.length) {
       data.forEach((item) => {
         const li = document.createElement('li');
@@ -44,18 +45,19 @@ const getModalContent = (imgURL, name, summary, totalComments, itemID) => {
   const commentInput = document.querySelector('#message');
 
   document.querySelector('.form').addEventListener('submit', (e) => {
-    addComment(nameInput.value, commentInput.value, itemID);
     e.preventDefault();
-    Swal.close();
+    addComment(nameInput.value, commentInput.value, itemID).then(()=>{
+      Swal.close();
+      displayModal(imgURL, name, itemID, summary);
+    })
   });
 };
 
 const displayModal = (imgURL, name, itemID, summary) => {
-  // get total comments for one item
   let totalComments = 0;
   getTotalComments(itemID).then((data) => {
     totalComments = data;
-    getModalContent(imgURL, name, summary, totalComments, itemID);
+    getModalContent(imgURL, name, summary, itemID);
   });
 };
 
