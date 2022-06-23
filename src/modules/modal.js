@@ -1,6 +1,14 @@
 import Swal from 'sweetalert2';
 import { getTotalComments, fetchComments, addComment } from './comments.js';
 
+const displayModal = (imgURL, name, itemID, summary) => {
+  let totalComments = 0;
+  getTotalComments(itemID).then((data) => {
+    totalComments = data;
+    getModalContent(imgURL, name, summary, itemID);
+  });
+};
+
 const getModalContent = (imgURL, name, summary, itemID) => {
   Swal.fire({
     html: `
@@ -30,7 +38,7 @@ const getModalContent = (imgURL, name, summary, itemID) => {
   });
 
   fetchComments(itemID).then((data) => {
-    document.getElementById('total-comments').innerHTML = ' (' + data.length + ')';
+    document.getElementById('total-comments').innerHTML = ` (${data.length})`;
     if (data.length) {
       data.forEach((item) => {
         const li = document.createElement('li');
@@ -46,18 +54,10 @@ const getModalContent = (imgURL, name, summary, itemID) => {
 
   document.querySelector('.form').addEventListener('submit', (e) => {
     e.preventDefault();
-    addComment(nameInput.value, commentInput.value, itemID).then(()=>{
+    addComment(nameInput.value, commentInput.value, itemID).then(() => {
       Swal.close();
       displayModal(imgURL, name, itemID, summary);
-    })
-  });
-};
-
-const displayModal = (imgURL, name, itemID, summary) => {
-  let totalComments = 0;
-  getTotalComments(itemID).then((data) => {
-    totalComments = data;
-    getModalContent(imgURL, name, summary, itemID);
+    });
   });
 };
 

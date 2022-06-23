@@ -36,7 +36,6 @@ class UI {
     });
 
     heart.addEventListener('click', (e) => {
-      
       addLike(itemID).then(() => {
         const likes = e.target.nextElementSibling;
         likes.textContent = '';
@@ -46,7 +45,7 @@ class UI {
           likes.textContent = likesCount;
           likesContainer.append(likes);
         });
-      }) 
+      });
     });
 
     cardContainer.append(card);
