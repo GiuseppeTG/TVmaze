@@ -1,5 +1,5 @@
 import { TV_API_URL } from './utils.js';
-import UI from './displayCard.js';
+import UI from './ui.js';
 
 const getSomeShows = async () => {
   const response = await fetch(`${TV_API_URL}/show`);

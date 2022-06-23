@@ -1,4 +1,4 @@
-import UI from './displayCard.js';
+import UI from './ui.js';
 import { TV_API_URL } from './utils.js';
 
 const searchedShows = async (query) => {

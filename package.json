@@ -1,7 +1,7 @@
 {
   "name": "tv-shows",
   "version": "1.0.0",
-  "description": "",
+  "description": "In this project we built a webpage where the user can search for different TV shows, comment them and like them.",
   "private": true,
   "scripts": {
     "test": "jest",
