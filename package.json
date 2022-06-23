@@ -4,7 +4,7 @@
   "description": "",
   "private": true,
   "scripts": {
-    "test": "jest --coverage",
+    "test": "jest",
     "build": "webpack",
     "start": "webpack serve --open"
   },
@@ -33,12 +33,7 @@
   },
   "dependencies": {
     "axios": "^0.27.2",
+    "jest-environment-jsdom": "^28.1.1",
     "sweetalert2": "^11.4.18"
-  },
-  "jest": {
-    "moduleNameMapper": {
-      "\\.(jpg|jpeg|png|gif)$": "<rootDir>/__mocks__/fileMock.js",
-      "\\.(css)$": "<rootDir>/__mocks__/styleMock.js"
-    }
   }
 }

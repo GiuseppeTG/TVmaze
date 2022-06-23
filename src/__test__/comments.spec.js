@@ -1,4 +1,4 @@
-import { getTotalComments } from '../src/modules/comments.js';
+import { getTotalComments } from '../modules/comments.js';
 
 describe('Get Comment Count', () => {
   test('Item ID can be a Number', () => {
