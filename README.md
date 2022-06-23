@@ -10,7 +10,8 @@
 
 - Major languages: HTML, CSS, JS, Jest.
 - Technologies used: Webpack, VSCode, git, GitHub, Gitflow
-- API: https://api.tvmaze.com/show
+- TVMaze API: https://api.tvmaze.com/show 
+- Involvement API: https://us-central1-involvement-api.cloudfunctions.net/capstoneApi/apps/
 
 ## Live Demo
 
