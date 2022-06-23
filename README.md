@@ -4,6 +4,8 @@
 
 > In this project we built a webpage where the user can search for different TV shows, comment them and like them.
 
+[Video](https://drive.google.com/file/d/1oIEWXL32SoS9nXczNdZc_bgM4KHWxMma/view?usp=sharing);
+
 ## Built With
 
 - Major languages: HTML, CSS, JS, Jest.
