@@ -6,14 +6,13 @@
 
 ## Built With
 
-- Major languages: HTML, CSS, JS, Jest
-- Frameworks
+- Major languages: HTML, CSS, JS, Jest.
 - Technologies used: Webpack, VSCode, git, GitHub, Gitflow
 - API: https://api.tvmaze.com/show
 
 ## Live Demo (if available)
 
-[Live Demo Link](https://livedemo.com)
+[Live Demo Link](https://giuseppetg.github.io/TVmaze/dist)
 
 ## Getting Started
 
@@ -24,20 +23,25 @@
 - Node
 - Git
 - Code Editor
+- Browser
 
 ### Setup
 
 - Clone the repository
 - Change directory into the project folder
-- Open project with text editor to view changes
 
 ### Install
 
+`npm install`
+
 ### Usage
+
+`npm run build`
+`npm start`
 
 ### Run tests
 
-### Deployment
+Test: `npm test`
 
 ## Authors
 
