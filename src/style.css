@@ -301,6 +301,10 @@ div.swal2-actions {
   display: none !important;
 }
 
+.swal2-close:focus {
+  box-shadow: none !important;
+}
+
 @media only screen and (max-width: 425px) {
   .text-logo {
     display: none;
